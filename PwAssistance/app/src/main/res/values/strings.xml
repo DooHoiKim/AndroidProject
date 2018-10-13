@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">PwAssistance</string>
+
+    <string name="app_name2">패스워드 등록/수정</string>
+    <string name="user_name">pro1822@gmail.com</string>
+
+    <string name="pw_circle">password input circle</string>
+    <string name="login_info">잠금번호 6자리를 입력하세요.</string>
+    <string name="password_info">저장할 패스워드 정보를 입력하세요.</string>
+    <string name="input_hint">여기에 입력하세요...</string>
+    <string name="search_hint">검색항목 입력(공백은 전체검색)</string>
+
+    <string name="pw_exist">기존 암호 6자리를 입력하세요.</string>
+    <string name="pw_exist_again">입력오류. 기존 암호 6자리를 입력하세요.</string>
+    <string name="pw_new">신규 암호 6자리를 입력하세요.</string>
+    <string name="pw_new2">신규 암호 6자리를 재입력하세요.</string>
+    <string name="pw_new_again">신규 암호 검증오류. 6자리를 재입력하세요.</string>
+    <string name="pw_complete">암호 변경 완료.</string>
+
+    <string name="reset">재배열</string>
+    <string name="del">DEL</string>
+    <string name="save">저  장</string>
+    <string name="delete">삭  제</string>
+    <string name="init">초기화</string>
+
+    <string name="db_name">pwAssist</string>
+
+    <string name="nav_list">패스워드 리스트</string>
+    <string name="nav_manage">패스워드 관리</string>
+    <string name="nav_change_login">로그인 PW 변경</string>
+    <string name="nav_db_manage">Database Manage</string>
+    <string name="nav_db_export">Export(SD)</string>
+    <string name="nav_db_import">Import(Phone)</string>
+
+    <string name="nav_open_drawer">Open navigation drawer</string>
+    <string name="nav_close_drawer">Close navigation drawer</string>
+
+    <string name="list_title_name">대상시스템</string>
+    <string name="list_title_id">아이디</string>
+    <string name="list_title_pw">패스워드</string>
+    <string name="list_title_desc">참고사항</string>
+
+
+</resources>
