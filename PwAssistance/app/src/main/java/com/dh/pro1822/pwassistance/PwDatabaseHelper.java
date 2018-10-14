@@ -71,7 +71,8 @@ public class PwDatabaseHelper extends SQLiteOpenHelper {
                 + " FROM " + ContractDB.PwListEntry.TABLE_NAME
                 + " WHERE " + ContractDB.PwListEntry.COLUMN_NAME + " LIKE '%" + parm + "%'"
                 + " OR " + ContractDB.PwListEntry.COLUMN_LOG_IN_ID + " LIKE '%" + parm + "%'"
-                + " OR " + ContractDB.PwListEntry.COLUMN_LOG_IN_PW + " LIKE '%" + parm + "%'";
+                + " OR " + ContractDB.PwListEntry.COLUMN_LOG_IN_PW + " LIKE '%" + parm + "%'"
+                + " ORDER BY " + ContractDB.PwListEntry.COLUMN_NAME;
         Cursor cursor;
         try {
             cursor = db.rawQuery(query_str, null);
