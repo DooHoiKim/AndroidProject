@@ -72,6 +72,7 @@ public class PwDatabaseHelper extends SQLiteOpenHelper {
                 + " WHERE " + ContractDB.PwListEntry.COLUMN_NAME + " LIKE '%" + parm + "%'"
                 + " OR " + ContractDB.PwListEntry.COLUMN_LOG_IN_ID + " LIKE '%" + parm + "%'"
                 + " OR " + ContractDB.PwListEntry.COLUMN_LOG_IN_PW + " LIKE '%" + parm + "%'"
+                + " OR " + ContractDB.PwListEntry.COLUMN_DESCRIPTION + " LIKE '%" + parm + "%'"
                 + " ORDER BY " + ContractDB.PwListEntry.COLUMN_NAME;
         Cursor cursor;
         try {
