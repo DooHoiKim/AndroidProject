@@ -33,8 +33,6 @@ import android.widget.Toast;
 public class PwListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private PasswordAdapter adapter;
-    private ListView listView;
-    private SearchView searchView;
     private String queryText;
 
     private static final int PERMISSION_REQUEST_CODE = 1822;
@@ -91,7 +89,7 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -102,7 +100,7 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
         String message;
 
@@ -132,7 +130,7 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
             startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
@@ -156,7 +154,7 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
         getMenuInflater().inflate(R.menu.menu_searchview, menu);
         MenuItem item = menu.findItem(R.id.action_search);
 
-        searchView = (SearchView) item.getActionView();
+        SearchView searchView = (SearchView) item.getActionView();
 //        searchView.onActionViewExpanded();
 
         if (searchView != null) {
@@ -190,7 +188,7 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
             searchView.setOnQueryTextListener(queryTextListener);
             */
 
-            EditText searchQuery = (EditText) searchView.findViewById(R.id.search_src_text);
+            EditText searchQuery = searchView.findViewById(R.id.search_src_text);
             searchQuery.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -200,7 +198,9 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
                         adapter.changeCursor(getPwListWhereCursor(queryText));
 
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        if (imm != null) {
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
 
                         return true;
                     }
@@ -227,11 +227,11 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
     */
 
     private void makeToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.nav_list);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer,
                 toolbar,
@@ -240,12 +240,12 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void makeListView() {
-        listView = findViewById(R.id.search_list);
+        ListView listView = findViewById(R.id.search_list);
 //        adapter = new PasswordAdapter(this, getPwListCursor(), CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter = new PasswordAdapter(this, getPwListWhereCursor(queryText));
         listView.setAdapter(adapter);
@@ -270,7 +270,7 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
         PwDatabaseHelper pwDatabaseHelper = PwDatabaseHelper.getsInstance(this);
         SQLiteDatabase db = pwDatabaseHelper.getReadableDatabase();
 
-        Cursor cursor = pwDatabaseHelper.getPwListWhereCursor(db, parm);
+        Cursor cursor = PwDatabaseHelper.getPwListWhereCursor(db, parm);
 
         if (cursor == null) {
             Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT).show();
