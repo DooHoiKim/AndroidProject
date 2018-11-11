@@ -63,11 +63,24 @@ public class PwListActivity extends AppCompatActivity implements NavigationView.
         makeListView();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        findViewById(R.id.list_header).setVisibility(View.INVISIBLE);
+        findViewById(R.id.search_list).setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        findViewById(R.id.list_header).setVisibility(View.VISIBLE);
+        findViewById(R.id.search_list).setVisibility(View.VISIBLE);
+    }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        adapter.changeCursor(getPwListWhereCursor(""));
+        adapter.changeCursor(getPwListWhereCursor(queryText));
     }
 
     @Override
